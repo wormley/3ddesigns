@@ -1,8 +1,9 @@
+draft=0;
 $fn=30;
 closem3=1.675;
 normalm3=1.7;
 loosem3=2;
-eart=2.5;
+eart=3.5;
 // bighead 9.50
 //little spacer 4.88
 //18.85 outside
@@ -17,14 +18,15 @@ eart=2.5;
 cmounts= [[ 60,25],[60,39]];
 carriage = [[47.5,35.25],[47.5,35.25-39.9]];
 carriager= 6;
-draft=0;
 module ear(right=false) {
+    earz1=40+5;
+    earz2=15+23+5;
     difference() {
         union() {hull() {
        cube([19,eart,5]);
-       translate([5,0,40])
+       translate([5,0,earz1])
            rotate([-90,0,0]) cylinder(r=5,h=eart);
-       translate([5+9,0,40])
+       translate([5+9,0,earz1])
            rotate([-90,0,0]) cylinder(r=5,h=eart);
 
     }
@@ -38,12 +40,14 @@ module ear(right=false) {
 }
 
    hull(){ translate([6,-.1,12]) rotate([-90,0,0]) cylinder(r=normalm3,h=6);
-    translate([6,-.1,15+23]) rotate([-90,0,0]) cylinder(r=normalm3,h=6);
+    translate([6,-.1,earz2]) rotate([-90,0,0]) cylinder(r=normalm3,h=6);
    }
    hull(){ translate([4.5+9,-.1,12]) rotate([-90,0,0]) cylinder(r=normalm3,h=6);
-    translate([4.5+9,-.1,15+23]) rotate([-90,0,0]) cylinder(r=normalm3,h=6);
+    translate([4.5+9,-.1,earz2]) rotate([-90,0,0]) cylinder(r=normalm3,h=6);
    };
-   translate([15.25,-.1,16]) rotate([-90,0,0]) cylinder(r=normalm3,h=6);
+hull() {   translate([15.25,-.1,16]) rotate([-90,0,0]) cylinder(r=normalm3,h=6);
+   translate([15.25,-.1,17]) rotate([-90,0,0]) cylinder(r=normalm3,h=6);
+}
     };
 }
 module motorhole(mr=12,h=4){
@@ -166,12 +170,12 @@ translate([-60,8,0])
 //translate([80-25,9,10])
 difference() {union() {
 // main
-    cube([23,46,3]);
+    translate([0,0.5,0]) cube([23,45,3]);
 // hotend platform
 translate([chh-(hsh/2) , cww - (hsw/2),0]) 
     cube([hsh,hsw,4.0]);
 // Tab
-    translate([-10,0,0]) cube([12,14,3]);
+    translate([-10,0.5,0]) cube([12,14,3]);
     
 }
 mounthole(5+9.5,cww,7,-.1,closem3,closem3);
@@ -186,6 +190,9 @@ translate([5-10.55,16-10.9,-.1]) cylinder(h=10,r=2.2);
 if (draft == 1 ) {
     translate([-40,-40,2]) cube([200,200,100]);
     translate([-40,-40,-1]) cube([70,150,10]);
+};
+if (draft == 2 ) {
+    translate([-31,-40,-1]) cube([200,200,100]);
 };
 };
 
